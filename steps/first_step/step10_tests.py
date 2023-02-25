@@ -1,6 +1,6 @@
 import unittest
 import numpy as np
-from main1 import Variable, square
+from .step10 import Variable, square
 
 
 def numerical_diff(f, x, eps=1e-4):
