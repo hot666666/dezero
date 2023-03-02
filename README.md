@@ -2,8 +2,6 @@
 
 ## memo
 
-[ ] python import - 경로에 대해 정리하기
-
 ---
 
 ## step7-8
@@ -70,12 +68,14 @@ python -m unittest discover [tests파일명]
                   x.grad = gx
               else:
                   x.grad = x.grad + gx  # 복사(새로생성)가 이루어진다.
-                  # x.grad += gx  # in-place 연산이 이루어진다.
+                  # x.grad += gx  # in-place 연산이 이루어진다. -> 이전 grad에 더해져 계산됨
   ```
 
   일반 연산의 경우, 연산의 결과값이 새로운 id의 변수에 할당되지만
 
   in-place연산의 경우, 같은 id의 변수에 값이 덮어쓰기가 된다.
+
+  gx는 처음에 gy고, 그래서 y.grad에 연산결과들과 이어지는 것과 같다
 
 ## step16
 
@@ -117,3 +117,31 @@ python -m unittest discover [tests파일명]
   ```
 
   pip install로 패키지를 설치한다면 파이썬 검색경로에 자동으로 추가되어 이런작업을 할 필요 없다.
+
+## step25
+
+- brew install graphviz
+- dot [dot file] -T png -o [png파일 이름]
+
+## step26
+
+- 문자열 포맷
+
+  나중에 문자열에 있던 {}에 변수값들이 들어감
+
+  ```python
+    dot_var = '{} [label={}, color=orange, style=filled]\n'
+    v = ...
+    name = ...
+    dot_var.format(id(v), name)
+  ```
+
+## step28, 29
+
+- 경사하강법 최적화 -> learning rate 필요, 미분값과 lr를 곱해 업데이트
+- 뉴턴방법 최적화 -> 식을 테일러급수로 표현 후 2차미분값을 통해 업데이트
+
+## step33_35
+
+- [ ] 고차미분
+- [ ] function.F
