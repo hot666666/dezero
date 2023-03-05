@@ -72,6 +72,7 @@ class Variable:
         self.generation = func.generation + 1
 
     def cleargrad(self):
+        print(id(self))
         self.grad = None
 
     def backward(self, retain_grad=False, create_graph=False):
@@ -92,6 +93,8 @@ class Variable:
 
         while funcs:
             f = funcs.pop()
+            for x in f.inputs:
+                print('in backward', id(x))
             gys = [output().grad for output in f.outputs]  # output is weakref
 
             with using_config('enable_backprop', create_graph):
@@ -174,8 +177,10 @@ class Mul(Function):
         return y
 
     def backward(self, gy):
-        x0, x1 = self.inputs[0].data, self.inputs[1].data
-        return gy * x1, gy * x0
+        x0, x1 = self.inputs
+        gx0 = gy * x1
+        gx1 = gy * x0
+        return gx0, gx1
 
 
 def mul(x0, x1):
@@ -220,9 +225,10 @@ class Div(Function):
         return y
 
     def backward(self, gy):
-        x0, x1 = self.inputs[0].data, self.inputs[1].data
+        x0, x1 = self.inputs
         gx0 = gy / x1
         gx1 = gy * (-x0 / x1 ** 2)
+
         return gx0, gx1
 
 
@@ -245,9 +251,8 @@ class Pow(Function):
         return y
 
     def backward(self, gy):
-        x = self.inputs[0].data
+        x, = self.inputs
         c = self.c
-
         gx = c * x ** (c - 1) * gy
         return gx
 
