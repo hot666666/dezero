@@ -143,5 +143,25 @@ python -m unittest discover [tests파일명]
 
 ## step33_35
 
-- [ ] 고차미분
-- [ ] function.F
+- 고차미분 -> 그래프를 계속 만들어내야한다.
+
+## step39
+
+- np.sum
+  - axis=1 -> 가로
+  - axis=0 -> 세로
+  - keepdims -> 축의 수를 유지
+
+## step44
+
+- setattr(name, value) -> CLASS.name = value
+  - CLASS.\_\_dict\_\_[name] -> value
+
+## step45
+
+- isinstance(obj, (A,B) )
+- Layer -> MLP
+
+# step46
+
+- 경사하강법 외 다양한 최적화 기법을 적용하기 위한 optimizer
